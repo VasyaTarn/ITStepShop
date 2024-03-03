@@ -1,0 +1,45 @@
+﻿@model ITStepShop.Models.Usage
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Видалення</h1>
+
+<h4>Застосування</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="DeletePost" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" disabled />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" disabled />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+
+                <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+                    <span>Видалити: @Model.Name ?</span>
+                    <button type="submit" class="btn btn-danger">Так</button>
+                    <a href="#" class="btn btn-primary"
+                       onclick="confirmDelete('@Model.Id', false)">Ні</a>
+                </span>
+
+                <span id="deleteSpan_@Model.Id">
+                    <a href="#" class="btn btn-warning "
+                       onclick="confirmDelete('@Model.Id', true)">Видалити</a>
+                </span>
+
+                @*  <input type="submit" value="Видалити" class="btn btn-danger" onclick="return confirm('Видалити @Model.CategoryName')"/> *@
+                <a asp-action="Index" class="btn btn-success ms-5">До списку застосувань</a>
+            </div>
+        </form>
+    </div>
+</div>
